@@ -1,0 +1,40 @@
+<!-- <div class="toss-div">
+  <h2 class="toss-title">Toss</h2>
+  <p>{{ team1.name }} vs {{ team2.name }}</p>
+
+  <button mat-raised-button (click)="performToss()">Toss</button>
+  <div *ngIf="tossResult">
+    <p>{{ tossResult }} won the toss and chose to bat first!</p>
+    <button (click)="startMatch()">Let's Play</button>
+  </div>
+</div> -->
+
+
+<div class="toss-div">
+  <h2 class="toss-title">Toss</h2>
+  <p>{{ team1.name }} vs {{ team2.name }}</p>
+
+
+  <button mat-raised-button (click)="performToss()">Toss</button>
+
+  <div  *ngIf="tossResult">
+    <mat-radio-group [(ngModel)]="selectedTeam">
+      <div class="team-selection">
+        <div class="team" *ngIf="team1">
+          <img style="width: 250px; height: 150px; object-fit: cover; border-radius: 10px" [src]="team1.image" alt="{{ team1.name }} flag" class="team-flag">
+          <mat-radio-button disabled [value]="team1.name">{{ team1.name }}</mat-radio-button>
+        </div>
+        <div class="team" *ngIf="team2">
+          <img style="width: 250px; height: 150px; object-fit: cover; border-radius: 10px" [src]="team2.image" alt="{{ team2.name }} flag" class="team-flag">
+          <mat-radio-button disabled [value]="team2.name">{{ team2.name }}</mat-radio-button>
+        </div>
+      </div>
+    </mat-radio-group>
+  </div>
+
+
+  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;" *ngIf="tossResult">
+    <p>{{ tossResult.name }} won the toss and chose to bat first!</p>
+    <button mat-raised-button (click)="startMatch()">Let's Play</button>
+  </div>
+</div>

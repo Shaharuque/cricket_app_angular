@@ -1,0 +1,61 @@
+<!-- <div>
+  <h2>Select Teams</h2>
+  @for (team of teams; track team) {
+  <div>
+    <input
+      type="checkbox"
+      [value]="team"
+      (change)="onTeamSelect(team, $event)"
+      [disabled]="isTeamDisabled(team)"
+    />
+    {{ team }}
+  </div>
+  }
+
+  <button (click)="proceedToToss()" [disabled]="selectedTeams.length !== 2">
+    Proceed to Toss
+  </button>
+</div> -->
+
+<!-- select-teams.component.html -->
+<!-- <div *ngFor="let team of teams" class="team">
+  <input type="checkbox"
+         [disabled]="isTeamDisabled(team)"
+         (change)="onTeamSelect(team, $event)" />
+  <img [src]="team.image" alt="{{ team.name }}" class="team-image"/>
+  <span>{{ team.name }}</span>
+</div>
+<button (click)="proceedToToss()" [disabled]="selectedTeams.length !== 2">
+  Proceed to Toss
+</button> -->
+
+<!-- select-teams.component.html -->
+<div>
+  <h2 style="text-align: center; margin-top: 40px">Let's Play Cricket</h2>
+  <mat-grid-list cols="2" rowHeight="200px" gutterSize="50px">
+    <mat-grid-tile *ngFor="let team of teams">
+      <mat-checkbox
+        [ngClass]="{ 'mat-checkbox-disabled': isTeamDisabled(team) }"
+        [disabled]="isTeamDisabled(team)"
+        (change)="onTeamSelect(team, $event)"
+      >
+      </mat-checkbox>
+      <img
+        mat-card-image
+        [src]="team.image"
+        alt="{{ team.name }}"
+        style="width: 250px; object-fit: cover; border-radius: 10px"
+      />
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div style="display: flex; justify-content: center">
+    <button
+      mat-raised-button
+      (click)="proceedToToss()"
+      [disabled]="selectedTeams.length !== 2"
+    >
+      Proceed to Toss
+    </button>
+  </div>
+</div>

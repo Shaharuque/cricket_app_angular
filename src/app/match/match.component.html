@@ -1,0 +1,24 @@
+<div style="display: flex; flex-direction: column; align-items: center">
+  <h2>Let's Play Cricket</h2>
+  <p>{{team1.name}} vs {{team2.name}}</p>
+  <p>{{tossWinner.name}} has won the toss and elected to bat first.</p>
+
+  <div *ngIf="play">
+    <div *ngFor="let inning of innings; let i = index">
+      <h3>{{ inning.team.name }}'s Innings</h3>
+      <p *ngFor="let run of inning.runs">Ball {{ run.ball }}: {{ run.run }}</p>
+      <p>Total Runs: {{ inning.totalRuns }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="play">
+    <p>Match Result</p>
+    <p>{{ winner }} has won the match congratulations!</p>
+  </div>
+
+
+  <div style="margin-bottom: 40px;">
+    <button *ngIf="innings.length < 2" (click)="playInning()">Start Play</button>
+  <button *ngIf="innings.length === 2" (click)="showResult()">Show Result</button>
+  </div>
+</div>
