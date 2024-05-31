@@ -23,6 +23,10 @@ export interface Match {
   matchWinner: string;
 }
 
+export interface MatchDetails extends Match {
+  innings: Inning[];
+}
+
 export interface MatchInterface {
   id: string;
   tossWinner: Team;

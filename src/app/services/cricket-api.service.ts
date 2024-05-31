@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatchDetails } from '../../types';
 
 interface Team {
   id: number;
@@ -34,6 +35,11 @@ export class CricketApiService {
   //get all matches
   getMatches(): Observable<any> {
     return this.http.get<any>(this.postUrl);
+  }
+
+  //get single match details
+  getMatchDetails(id: string): Observable<MatchDetails> {
+    return this.http.get<any>(`${this.postUrl}/${id}`);
   }
 }
 

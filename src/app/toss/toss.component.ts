@@ -42,38 +42,6 @@ export class TossComponent {
   }
 
   startMatch() {
-    this.router.navigate([`/match/${this.matchId}`]);
+    this.router.navigate([`/play/${this.matchId}`]);
   }
 }
-
-
-// import { Component } from '@angular/core';
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-toss',
-//   templateUrl: './toss.component.html',
-//   styleUrl: './toss.component.css'
-// })
-// export class TossComponent {
-//   team1: any;
-//   team2: any;
-//   tossResult: string= '';
-
-//   constructor(private router: Router) {}
-
-//   ngOnInit() {
-//     this.team1 = localStorage.getItem('team1') ?? '';
-//     this.team2 = localStorage.getItem('team2') ?? '';
-//     console.log('team1',this.team1);
-//   }
-
-//   performToss() {
-//     this.tossResult = Math.random() > 0.5 ? this.team1 : this.team2;
-//     localStorage.setItem('tossWinner', this.tossResult);
-//   }
-
-//   startMatch() {
-//     this.router.navigate(['/match']);
-//   }
-// }

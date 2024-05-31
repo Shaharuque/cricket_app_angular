@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { SelectTeamsComponent } from './select-teams/select-teams.component';
 import { TossComponent } from './toss/toss.component';
 import { MatchComponent } from './match/match.component';
-import { ResultComponent } from './result/result.component';
-import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -21,6 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AllMatchesComponent } from './all-matches/all-matches.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SingleMatchDetailsComponent } from './single-match-details/single-match-details.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +27,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     SelectTeamsComponent,
     TossComponent,
     MatchComponent,
-    ResultComponent,
-    ScoreboardComponent,
     NavbarComponent,
-    AllMatchesComponent
+    AllMatchesComponent,
+    SingleMatchDetailsComponent
   ],
   imports: [
     FormsModule,

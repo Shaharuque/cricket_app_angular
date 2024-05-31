@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CricketApiService } from '../services/cricket-api.service';
 import { Match } from '../../types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-matches',
@@ -17,7 +18,7 @@ export class AllMatchesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matchService: CricketApiService ){}
+  constructor(private matchService: CricketApiService, private route: Router ){}
 
   fetchMatches() {
      // getting all matches played till now
@@ -40,6 +41,7 @@ export class AllMatchesComponent implements OnInit {
 
   viewMatchDetails(id: string) {
     console.log('View match details for:', id);
+    this.route.navigate([`/match/detals/${id}`]);
   }
 
 }
