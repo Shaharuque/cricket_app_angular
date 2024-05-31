@@ -1,0 +1,46 @@
+<div class="match-list-container">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let match"> {{match.id}} </td>
+    </ng-container>
+
+    <!-- Team 1 Column -->
+    <ng-container matColumnDef="team1">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Team 1 </th>
+      <td mat-cell *matCellDef="let match"> {{match.team1.name}} </td>
+    </ng-container>
+
+    <!-- Team 2 Column -->
+    <ng-container matColumnDef="team2">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Team 2 </th>
+      <td mat-cell *matCellDef="let match"> {{match.team2.name}} </td>
+    </ng-container>
+
+    <!-- Toss Winner Column -->
+    <ng-container matColumnDef="tossWinner">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Toss Winner </th>
+      <td mat-cell *matCellDef="let match"> {{match.tossWinner.name}} </td>
+    </ng-container>
+
+    <!-- Match Winner Column -->
+    <ng-container matColumnDef="matchWinner">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Match Winner </th>
+      <td mat-cell *matCellDef="let match"> {{match.matchWinner}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let match">
+        <button mat-button (click)="viewMatchDetails(match.id)">View</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

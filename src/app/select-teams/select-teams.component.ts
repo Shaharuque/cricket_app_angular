@@ -9,8 +9,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
   styleUrl: './select-teams.component.css'
 })
 export class SelectTeamsComponent {
-  // teams = ['Team A', 'Team B', 'Team C', 'Team D', 'Team E', 'Team F'];
-  // selectedTeams: string[] = [];
+
   teams: Team[] = [];
   selectedTeams: Team[] = [];
 

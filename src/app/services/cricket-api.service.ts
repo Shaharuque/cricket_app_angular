@@ -18,16 +18,22 @@ export class CricketApiService {
 
   constructor(private http: HttpClient) {}
 
+  // get all teams
   getTeams(): Observable<Team[]> {
     return this.http.get<Team[]>(this.apiUrl);
   }
 
-   // Post new data
+   // post match details data
    postData(data:any):Observable<any>{
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(data);
     console.log('console body from post api',body)
     return this.http.post<any>(this.postUrl,body,{'headers':headers})
+  }
+
+  //get all matches
+  getMatches(): Observable<any> {
+    return this.http.get<any>(this.postUrl);
   }
 }
 

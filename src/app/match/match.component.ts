@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CricketApiService } from '../services/cricket-api.service';
-import { v4 as uuidv4 } from 'uuid';  // Import the UUID function
 
 @Component({
   selector: 'app-match',
@@ -15,14 +14,18 @@ export class MatchComponent {
   innings: any[] = [];
   balls: number = 6; // 6 balls for each team
   play: boolean = false;
-  matchId?: string; // Declare a variable to hold the unique match ID
-  winner?:any;
-  id:any = '';
+  winner?: any;
+  id: any = '';
+  displayedColumns: string[] = ['ball', 'run'];
 
-  constructor(private router: ActivatedRoute, private route: Router ,private matchService:CricketApiService) {}
+  constructor(
+    private router: ActivatedRoute,
+    private route: Router,
+    private matchService: CricketApiService
+  ) {}
 
   ngOnInit() {
-    this.router.paramMap.subscribe(params => {
+    this.router.paramMap.subscribe((params) => {
       this.id = params.get('id');
       console.log(this.id); // Use the id as needed
     });
@@ -38,21 +41,18 @@ export class MatchComponent {
       this.team2 = JSON.parse(team2String);
     }
 
-    if(tossWinnerString) {
+    if (tossWinnerString) {
       this.tossWinner = JSON.parse(tossWinnerString);
     }
 
-    // this.tossWinner = localStorage.getItem('tossWinner') ?? '';
     this.innings.push({ team: this.tossWinner, runs: [], totalRuns: 0 });
-    // this.innings.push({ team: this.tossWinner === this.team1 ? this.team2 : this.team1, runs: [], totalRuns: 0 });
-    console.log('initial call',this.tossWinner);
-    this.matchId = uuidv4(); // Generate a unique match ID
+    console.log('initial call', this.tossWinner);
   }
 
   playInning() {
     let currentInning = this.innings[this.innings.length - 1];
-    console.log('current innings',currentInning);
-    console.log(this.innings)
+    console.log('current innings', currentInning);
+    console.log(this.innings);
     for (let i = 1; i <= this.balls; i++) {
       let run = this.randomRun();
       currentInning.runs.push({ ball: i, run: run });
@@ -60,33 +60,20 @@ export class MatchComponent {
     }
 
     if (this.innings.length === 1) {
-
-      let secondTeam = this.tossWinner.name === this.team1.name ? this.team2 : this.team1;
-      console.log('second team',secondTeam)
+      let secondTeam =
+        this.tossWinner.name === this.team1.name ? this.team2 : this.team1;
+      console.log('second team', secondTeam);
       let currentInning2 = this.innings.length;
       this.innings.push({ team: secondTeam, runs: [], totalRuns: 0 });
-      console.log(this.innings[currentInning2])
+      console.log(this.innings[currentInning2]);
       for (let i = 1; i <= this.balls; i++) {
         let run = this.randomRun();
         this.innings[currentInning2].runs.push({ ball: i, run: run });
         this.innings[currentInning2].totalRuns += run;
       }
-     this.innings[currentInning2].team = secondTeam;
+      this.innings[currentInning2].team = secondTeam;
     }
     this.play = true;
-
-    const matchData = {
-      id: this.matchId,// Replace with actual unique match ID
-      tossWinner: this.tossWinner,
-      team1: this.team1,
-      team2: this.team2,
-      innings: this.innings
-    };
-
-    // this.matchService.postData(matchData).subscribe((data) => {
-    //   console.log('Match data posted successfully', data);
-    // });
-
 
     // Determine the winner
     if (this.innings[0].totalRuns > this.innings[1].totalRuns) {
@@ -94,9 +81,22 @@ export class MatchComponent {
     } else if (this.innings[0].totalRuns < this.innings[1].totalRuns) {
       this.winner = this.innings[1].team.name;
     } else {
-      this.winner = 'It\'s a tie!';
+      this.winner = "It's a tie!";
     }
     localStorage.setItem('winner', this.winner);
+
+    // Post match data to the API
+    const matchData = {
+      id: this.id, // Replace with actual unique match ID
+      tossWinner: this.tossWinner,
+      team1: this.team1,
+      team2: this.team2,
+      innings: this.innings,
+      matchWinner: this.winner,
+    };
+    console.log('Match data', matchData);
+
+    this.matchService.postData(matchData).subscribe((data) => {});
   }
 
   randomRun() {
@@ -110,4 +110,10 @@ export class MatchComponent {
     this.route.navigate(['/result']);
   }
 
+  playAgain() {
+    this.route.navigate(['/']);
+  }
+  allMatches() {
+    this.route.navigate(['/matches']);
+  }
 }

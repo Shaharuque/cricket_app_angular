@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';  // Import the UUID function
   styleUrl: './toss.component.css'
 })
 export class TossComponent {
+  matchId?: string; // Declare a variable to hold the unique match ID
   team1: any;
   team2: any;
   tossResult: any;
@@ -16,6 +17,7 @@ export class TossComponent {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    this.matchId = uuidv4(); // Generate a unique match ID
     const team1String = localStorage.getItem('team1');
     const team2String = localStorage.getItem('team2');
 
@@ -40,7 +42,7 @@ export class TossComponent {
   }
 
   startMatch() {
-    this.router.navigate(['/match/23232']);
+    this.router.navigate([`/match/${this.matchId}`]);
   }
 }
 

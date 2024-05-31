@@ -17,6 +17,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { AllMatchesComponent } from './all-matches/all-matches.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     MatchComponent,
     ResultComponent,
     ScoreboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    AllMatchesComponent
   ],
   imports: [
     FormsModule,
@@ -37,7 +42,10 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatCheckboxModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     provideAnimationsAsync()
