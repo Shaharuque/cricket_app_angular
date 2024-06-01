@@ -1,4 +1,4 @@
-interface Team {
+export interface Team {
   id: number;
   name: string;
   image: string;
@@ -9,7 +9,7 @@ interface Run {
   run: number;
 }
 
-interface Inning {
+export interface Inning {
   team: Team;
   runs: Run[];
   totalRuns: number;

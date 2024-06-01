@@ -1,13 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatchDetails } from '../../types';
-
-interface Team {
-  id: number;
-  name: string;
-  image: string;
-}
+import { MatchDetails, Team } from '../../types';
 
 @Injectable({
   providedIn: 'root'

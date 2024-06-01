@@ -1,1 +1,44 @@
-<p>single-match-details works!</p>
+<div class="single-match-main">
+  <h1>Match Details</h1>
+  <p>{{matchData?.team1?.name}} vs {{matchData?.team2?.name}}</p>
+  <p class="toss-winner">{{matchData?.tossWinner?.name}} has won the toss and elected to bat first.</p>
+
+  <div>
+    <div *ngFor="let inning of matchInnings; let i = index">
+      <div class="team-banner">
+        <h3>
+          {{ inning.team.name }}'s Innings:
+        </h3>
+          <img
+            class="custom-image"
+            [src]="inning.team.image"
+            alt="{{ inning.team.name }} flag"
+          />
+      </div>
+
+      <table mat-table [dataSource]="inning.runs" class="mat-elevation-z8">
+        <ng-container matColumnDef="ball">
+          <th mat-header-cell *matHeaderCellDef>Ball</th>
+          <td mat-cell *matCellDef="let element">{{ element.ball }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="run">
+          <th mat-header-cell *matHeaderCellDef>Run</th>
+          <td mat-cell *matCellDef="let element">{{ element.run }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <p class="total">Total Runs: {{ inning.totalRuns }}</p>
+    </div>
+  </div>
+
+  <div class="match-result">
+    <p class="match-result-title">Match Result</p>
+    <p class="match-result-banner">
+      {{ matchData?.matchWinner !== 'It\'s a tie!' ? matchData?.matchWinner + ' has won the match.' : 'The match is a tie!' }}
+    </p>
+  </div>
+
+</div>

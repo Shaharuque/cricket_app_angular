@@ -41,7 +41,7 @@ export class AllMatchesComponent implements OnInit {
 
   viewMatchDetails(id: string) {
     console.log('View match details for:', id);
-    this.route.navigate([`/match/detals/${id}`]);
+    this.route.navigate([`/match/details/${id}`]);
   }
 
 }

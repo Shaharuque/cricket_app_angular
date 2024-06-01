@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'toss', component: TossComponent },
   { path: 'play/:id', component: MatchComponent },
   { path: 'matches', component: AllMatchesComponent },
-  { path: 'match/detals/:matchId', component: SingleMatchDetailsComponent }
+  { path: 'match/details/:matchId', component: SingleMatchDetailsComponent }
 ];
 
 @NgModule({

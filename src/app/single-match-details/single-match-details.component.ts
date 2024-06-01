@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CricketApiService } from '../services/cricket-api.service';
+import { Inning, MatchDetails } from '../../types';
 
 @Component({
   selector: 'app-single-match-details',
   templateUrl: './single-match-details.component.html',
-  styleUrl: './single-match-details.component.css'
+  styleUrls: ['./single-match-details.component.css', '../match/match.component.css']
 })
-export class SingleMatchDetailsComponent {
+export class SingleMatchDetailsComponent implements OnInit {
 
-  matchId:string = '';
+  matchId: string = '';
+  matchData: any | undefined; // Define matchData as MatchDetails or undefined
+  matchInnings: Inning[] = [];
+  displayedColumns: string[] = ['ball', 'run']; //for table
 
   constructor(
     private router: ActivatedRoute,
@@ -17,23 +21,25 @@ export class SingleMatchDetailsComponent {
     private matchService: CricketApiService
   ) {}
 
-  fetchMatchDetails() {
-    this.matchService.getMatchDetails(this.matchId).subscribe(
-      (data) => {
-        console.log('Match details:', data);
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
-  }
-
   ngOnInit() {
     this.router.paramMap.subscribe((params) => {
       const id = params.get('matchId');
       this.matchId = id || '';
+      this.fetchMatchDetails(); // Call fetchMatchDetails() after matchId is set
     });
+  }
 
-    this.fetchMatchDetails();
+  fetchMatchDetails() {
+    if (this.matchId) {
+      this.matchService.getMatchDetails(this.matchId).subscribe(
+        (data: MatchDetails) => {
+          this.matchData = data;
+          this.matchInnings = data.innings;
+        },
+        (error) => {
+          console.error('Error fetching data:', error);
+        }
+      );
+    }
   }
 }
