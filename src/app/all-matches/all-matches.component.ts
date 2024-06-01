@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './all-matches.component.css'
 })
 export class AllMatchesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'team1', 'team2', 'tossWinner', 'matchWinner', 'actions'];
+  displayedColumns: string[] = ['id', 'team1', 'team2', 'tossWinner', 'matchWinner', 'actions','actions2'];
   dataSource = new MatTableDataSource<Match>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -25,6 +25,9 @@ export class AllMatchesComponent implements OnInit {
      this.matchService.getMatches().subscribe(
       (data) => {
         this.dataSource = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(this.paginator);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -34,14 +37,21 @@ export class AllMatchesComponent implements OnInit {
 
   ngOnInit() {
     this.fetchMatches();
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   viewMatchDetails(id: string) {
-    console.log('View match details for:', id);
     this.route.navigate([`/match/details/${id}`]);
+  }
+
+  deleteMatch(id: string) {
+    this.matchService.deleteMatch(id).subscribe(
+      (data) => {
+        this.fetchMatches();
+      },
+      (error) => {
+        console.error('Error deleting match:', error);
+      }
+    );
   }
 
 }

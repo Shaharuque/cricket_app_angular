@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CricketApiService } from '../services/cricket-api.service';
+import { Inning, Team } from '../../types';
 
 @Component({
   selector: 'app-match',
@@ -8,14 +9,14 @@ import { CricketApiService } from '../services/cricket-api.service';
   styleUrl: './match.component.css',
 })
 export class MatchComponent {
-  team1: any;
-  team2: any;
-  tossWinner: any;
-  innings: any[] = [];
+  team1= {} as Team;
+  team2= {} as Team;
+  tossWinner= {} as Team;
+  innings: Inning[] = [];
   balls: number = 6; // 6 balls for each team
   play: boolean = false;
-  winner?: any;
-  id: any = '';
+  winner?: string = '';
+  id: string = '';
   displayedColumns: string[] = ['ball', 'run'];
 
   constructor(
@@ -26,8 +27,7 @@ export class MatchComponent {
 
   ngOnInit() {
     this.router.paramMap.subscribe((params) => {
-      this.id = params.get('id');
-      console.log(this.id); // Use the id as needed
+      this.id = params.get('id') || '';
     });
     const team1String = localStorage.getItem('team1');
     const team2String = localStorage.getItem('team2');
@@ -46,13 +46,10 @@ export class MatchComponent {
     }
 
     this.innings.push({ team: this.tossWinner, runs: [], totalRuns: 0 });
-    console.log('initial call', this.tossWinner);
   }
 
   playInning() {
     let currentInning = this.innings[this.innings.length - 1];
-    console.log('current innings', currentInning);
-    console.log(this.innings);
     for (let i = 1; i <= this.balls; i++) {
       let run = this.randomRun();
       currentInning.runs.push({ ball: i, run: run });
@@ -62,10 +59,8 @@ export class MatchComponent {
     if (this.innings.length === 1) {
       let secondTeam =
         this.tossWinner.name === this.team1.name ? this.team2 : this.team1;
-      console.log('second team', secondTeam);
       let currentInning2 = this.innings.length;
       this.innings.push({ team: secondTeam, runs: [], totalRuns: 0 });
-      console.log(this.innings[currentInning2]);
       for (let i = 1; i <= this.balls; i++) {
         let run = this.randomRun();
         this.innings[currentInning2].runs.push({ ball: i, run: run });
@@ -94,7 +89,6 @@ export class MatchComponent {
       innings: this.innings,
       matchWinner: this.winner,
     };
-    console.log('Match data', matchData);
 
     this.matchService.postData(matchData).subscribe((data) => {});
   }
@@ -105,7 +99,6 @@ export class MatchComponent {
   }
 
   showResult() {
-    console.log(this.innings);
     localStorage.setItem('innings', JSON.stringify(this.innings));
     this.route.navigate(['/result']);
   }

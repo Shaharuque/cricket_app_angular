@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatchDetails, Team } from '../../types';
+import { MatchDetails, MatchInterface, Team } from '../../types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CricketApiService {
-
   private apiUrl = 'http://localhost:3000/teams'; // Replace with your API endpoint
   private postUrl = 'http://localhost:3000/matches'; // Replace with your API endpoint
 
@@ -18,12 +17,13 @@ export class CricketApiService {
     return this.http.get<Team[]>(this.apiUrl);
   }
 
-   // post match details data
-   postData(data:any):Observable<any>{
-    const headers = { 'content-type': 'application/json'}
-    const body=JSON.stringify(data);
-    console.log('console body from post api',body)
-    return this.http.post<any>(this.postUrl,body,{'headers':headers})
+  // post match details data
+  postData(data: MatchInterface): Observable<MatchInterface> {
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(data);
+    return this.http.post<MatchInterface>(this.postUrl, body, {
+      headers: headers,
+    });
   }
 
   //get all matches
@@ -35,6 +35,11 @@ export class CricketApiService {
   getMatchDetails(id: string): Observable<MatchDetails> {
     return this.http.get<any>(`${this.postUrl}/${id}`);
   }
+
+  //delete match
+  deleteMatch(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.postUrl}/${id}`);
+  }
 }
 
-export {Team}
+export { Team };

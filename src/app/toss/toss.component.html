@@ -1,14 +1,3 @@
-<!-- <div class="toss-div">
-  <h2 class="toss-title">Toss</h2>
-  <p>{{ team1.name }} vs {{ team2.name }}</p>
-
-  <button mat-raised-button (click)="performToss()">Toss</button>
-  <div *ngIf="tossResult">
-    <p>{{ tossResult }} won the toss and chose to bat first!</p>
-    <button (click)="startMatch()">Let's Play</button>
-  </div>
-</div> -->
-
 
 <div class="toss-div">
   <h2 class="toss-title">Toss</h2>
@@ -17,7 +6,7 @@
 
   <button mat-raised-button (click)="performToss()">Toss</button>
 
-  <div  *ngIf="tossResult">
+  <div *ngIf="tossResult.name">
     <mat-radio-group [(ngModel)]="selectedTeam">
       <div class="team-selection">
         <div class="team" *ngIf="team1">
@@ -30,11 +19,11 @@
         </div>
       </div>
     </mat-radio-group>
+
+    <div class="toss-bottom">
+      <p>{{ tossResult.name }} won the toss and chose to bat first!</p>
+      <button mat-raised-button (click)="startMatch()">Let's Play</button>
+    </div>
   </div>
 
-
-  <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;" *ngIf="tossResult">
-    <p>{{ tossResult.name }} won the toss and chose to bat first!</p>
-    <button mat-raised-button (click)="startMatch()">Let's Play</button>
-  </div>
 </div>

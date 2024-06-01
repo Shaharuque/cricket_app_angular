@@ -20,6 +20,7 @@ import { AllMatchesComponent } from './all-matches/all-matches.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SingleMatchDetailsComponent } from './single-match-details/single-match-details.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SingleMatchDetailsComponent } from './single-match-details/single-match
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()
