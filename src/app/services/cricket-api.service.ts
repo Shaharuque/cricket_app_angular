@@ -7,12 +7,12 @@ import { MatchDetails, MatchInterface, Team } from '../../types';
   providedIn: 'root',
 })
 export class CricketApiService {
-  private apiUrl = 'http://localhost:3000/teams'; // Replace with your API endpoint
-  private postUrl = 'http://localhost:3000/matches'; // Replace with your API endpoint
+  // private apiUrl = 'http://localhost:3000/teams'; // Replace with your API endpoint
+  // private postUrl = 'http://localhost:3000/matches'; // Replace with your API endpoint
 
   // Hosted URL
-  // private apiUrl = 'https://cricket-app-server.onrender.com/teams';
-  // private postUrl = 'https://cricket-app-server.onrender.com/matches';
+  private apiUrl = 'https://cricket-app-server.onrender.com/teams';
+  private postUrl = 'https://cricket-app-server.onrender.com/matches';
 
   constructor(private http: HttpClient) {}
 
