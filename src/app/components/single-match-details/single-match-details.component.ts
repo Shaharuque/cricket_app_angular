@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CricketApiService } from '../services/cricket-api.service';
-import { Inning, MatchDetails } from '../../types';
+import { CricketApiService } from '../../services/cricket-api.service';
+import { Inning, MatchDetails } from '../../../types';
 
 @Component({
   selector: 'app-single-match-details',

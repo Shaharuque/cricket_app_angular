@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid'; // Import the UUID function
-import { Team } from '../../types';
+import { Team } from '../../../types';
 
 @Component({
   selector: 'app-toss',

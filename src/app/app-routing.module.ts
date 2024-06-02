@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SelectTeamsComponent } from './select-teams/select-teams.component';
-import { TossComponent } from './toss/toss.component';
-import { MatchComponent } from './match/match.component';
-import { AllMatchesComponent } from './all-matches/all-matches.component';
-import { SingleMatchDetailsComponent } from './single-match-details/single-match-details.component';
+import { SelectTeamsComponent } from './components/select-teams/select-teams.component';
+import { TossComponent } from './components/toss/toss.component';
+import { MatchComponent } from './components/match/match.component';
+import { AllMatchesComponent } from './components/all-matches/all-matches.component';
+import { SingleMatchDetailsComponent } from './components/single-match-details/single-match-details.component';
 
 const routes: Routes = [
   { path: '', component: SelectTeamsComponent },

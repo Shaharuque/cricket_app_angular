@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CricketApiService } from '../services/cricket-api.service';
-import { Inning, Team } from '../../types';
+import { CricketApiService } from '../../services/cricket-api.service';
+import { Inning, Team } from '../../../types';
 
 @Component({
   selector: 'app-match',

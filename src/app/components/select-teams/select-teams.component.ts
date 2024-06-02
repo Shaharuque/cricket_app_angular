@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CricketApiService, Team } from '../services/cricket-api.service';
+import { CricketApiService, Team } from '../../services/cricket-api.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
