@@ -9,25 +9,31 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-all-matches',
   templateUrl: './all-matches.component.html',
-  styleUrl: './all-matches.component.css'
+  styleUrls: ['./all-matches.component.css']
 })
 export class AllMatchesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'team1', 'team2', 'tossWinner', 'matchWinner', 'actions','actions2'];
+  displayedColumns: string[] = ['id', 'team1', 'team2', 'tossWinner', 'matchWinner', 'actions', 'actions2'];
   dataSource = new MatTableDataSource<Match>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matchService: CricketApiService, private route: Router ){}
+  constructor(private matchService: CricketApiService, private router: Router) {}
+
+  ngOnInit() {
+    this.fetchMatches();
+    console.log('data source',this.dataSource)
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   fetchMatches() {
-     // getting all matches played till now
-     this.matchService.getMatches().subscribe(
+    this.matchService.getMatches().subscribe(
       (data) => {
-        this.dataSource = data;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        console.log(this.paginator);
+        this.dataSource.data = data;
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -35,12 +41,8 @@ export class AllMatchesComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.fetchMatches();
-  }
-
   viewMatchDetails(id: string) {
-    this.route.navigate([`/match/details/${id}`]);
+    this.router.navigate([`/match/details/${id}`]);
   }
 
   deleteMatch(id: string) {
@@ -53,8 +55,4 @@ export class AllMatchesComponent implements OnInit {
       }
     );
   }
-
 }
-
-
-
